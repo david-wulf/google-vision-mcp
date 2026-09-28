@@ -27,11 +27,17 @@ npm install && npm run build && npm test
 ```
 
 Key über `GOOGLE_VISION_API_KEY` (Fallback `GOOGLE_API_KEY`) — ein Google-Cloud-Key (`AIza…`)
-aus einem Projekt mit aktivierter Cloud Vision API. In Claude Code über den Infisical-Wrapper
-registriert, der Key liegt nie in einer Konfigurationsdatei:
+aus einem Projekt mit aktivierter Cloud Vision API und Billing, am besten auf `vision.googleapis.com`
+beschränkt. Der Key gehört nie ins Repo.
 
-```bash
-claude mcp add -s user google-vision -- node C:\Users\david\.claude\infisical-run.mjs --project <infisical-projekt> --env dev --alias Google-API-Key:GOOGLE_VISION_API_KEY -- node C:\Users\david\Claude-Code-Projekte\google-vision-mcp\dist\index.js
+Einfachster Weg: Key als Benutzer-Umgebungsvariable setzen, dann ohne Key registrieren. Der Server
+erbt die Variable vom Claude-Prozess (nach Neustart von Claude):
+
+```powershell
+[Environment]::SetEnvironmentVariable("GOOGLE_VISION_API_KEY", (Read-Host "Vision-Key"), "User")
+claude mcp add -s user google-vision -- node <pfad>\google-vision-mcp\dist\index.js
 ```
+
+Alternativ über einen Secret-Wrapper (z. B. Infisical), der die Variable nur für den Prozess setzt.
 
 Optional: `REQUEST_TIMEOUT` in ms (Standard 30000).
