@@ -163,11 +163,15 @@ export interface ImageResult {
 
 const round = (n: number | undefined, d = 2) => Math.round((n ?? 0) * 10 ** d) / 10 ** d;
 
+// Second-level suffixes under which the registrable domain has three labels (co.uk, com.au, …).
+const MULTI_LABEL_SUFFIX = /^(co|com|net|org|gov|ac|edu|ne|or)\.[a-z]{2}$/;
+
 /** Registrable-domain approximation: good enough to tell "our CDN" from "someone else's site". */
 export function siteOf(url: string): string {
   try {
     const parts = new URL(url).hostname.replace(/^www\./, "").split(".");
-    return parts.slice(-2).join(".");
+    const n = MULTI_LABEL_SUFFIX.test(parts.slice(-2).join(".")) ? 3 : 2;
+    return parts.slice(-n).join(".");
   } catch {
     return url;
   }

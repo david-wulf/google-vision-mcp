@@ -95,4 +95,6 @@ describe("schema", () => {
 it("siteOf strips www and subdomains", () => {
   expect(siteOf("https://cdn.shopify.com/x.jpg")).toBe("shopify.com");
   expect(siteOf("https://www.solakon.de/a")).toBe("solakon.de");
+  expect(siteOf("https://img.shop.co.za/x.png")).toBe("shop.co.za");
+  expect(siteOf("https://www.bbc.co.uk/a")).toBe("bbc.co.uk");
 });
