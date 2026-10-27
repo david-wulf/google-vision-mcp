@@ -7,7 +7,7 @@ Eigenbau-MCP-Server für die Google Cloud Vision API, zugeschnitten auf Bilder-S
 - Einstieg: `src/index.ts` — Low-Level-`Server` mit `ListTools`/`CallTool`-Handlern, Key-Prüfung beim Start
 - Logik: `src/vision.ts` — `FEATURES`, `AnalyzeImagesSchema` (zod), `annotateImages()` (lädt Bild selbst, Fallback: Google holt URL), `summarise()`, `siteOf()`, `formatMarkdown()`
 - Tests: `src/vision.test.ts` (vitest)
-- Herkunft/Git: Remotes: `forgejo` (`192.168.20.20:3000/davidwulf/google-vision-mcp`), `homeandsmart` (`homeandsmart-gmbh/google-vision-mcp`). Branch `main`.
+- Herkunft/Git: Branch `main`; neben diesem Repo gibt es private Spiegel (`git remote -v`).
 
 ## Tools
 - `vision_analyze_images` — 1–16 Bild-URLs; Features `labels`, `objects`, `text`, `web`, `safe-search`, `faces`, `properties`, `crop-hints` (lesend, **kostenpflichtig**: je Bild × Feature, 1.000 Einheiten/Monat frei)
